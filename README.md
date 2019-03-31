@@ -54,13 +54,13 @@ This repository contains an example of embedding the Signal Sciences Agent in th
 #### 1. Set Agent Keys in mandatory.yaml
 
 #### 2. Build the nginx ingress + Signal Sciences Module container 
-*Set whatever registry + repository name you'd like here, just be sure to set* `controller.image.repository:` *to match in [mandatory.yaml](mandatory.yaml)*
+*Set whatever registry + repository name you'd like here, just be sure to set the image to match in [mandatory.yaml](mandatory.yaml)*
 ```
 docker build -t myregistry/sigsci-module-nginx-ingress:0.22.0 sigsci-module-nginx-ingress/
 ```
 
 #### 3. Build the Signal Sciences Agent sidecar container
-*Again, set whatever registry + repository name you'd like here, just be sure to set* `controller.extraContainers.image:` *to match in [mandatory.yaml](mandatory.yaml)*
+*Again, set whatever registry + repository name you'd like here, just be sure to set the image to match in [mandatory.yaml](mandatory.yaml)*
 ```
 docker build -t myregistry/sigsci-agent:3.21.0 sigsci-agent/
 ```
