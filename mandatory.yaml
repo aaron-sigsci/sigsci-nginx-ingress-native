@@ -275,7 +275,7 @@ spec:
             - name: SIGSCI_ACCESSKEYID
               value: SETME
             - name: SIGSCI_SECRETACCESSKEY
-              value: SETMETOO
+              value: SETME
       volumes:
         - name: sigsci-socket
           emptyDir: {}

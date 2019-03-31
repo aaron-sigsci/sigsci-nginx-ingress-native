@@ -10,7 +10,7 @@ This repository contains an example of embedding the Signal Sciences Agent in th
   - This container is a sidecar, running the Signal Sciences Agent, that will be included in the same pod as the nginx-ingress-controller
 - [mandatory.yaml](mandatory.yaml)
   - This file contains a modified template of the Generic Ingress Controller Deployment as described at https://kubernetes.github.io/ingress-nginx/deploy/#prerequisite-generic-deployment-command. The main additions are:
-    - Changing the ingress container to load the custom Signal Sciences Agent container and adding Volume mounts for the socket file communication between the Agent container and Module/ingress container:
+    - Changing the ingress container to load the custom Signal Sciences Module/ingress container and adding Volume mounts for socket file communication between the Module/ingress container and Agent sidecar container:
     ```
     containers:
       - name: nginx-ingress-controller
@@ -19,6 +19,15 @@ This repository contains an example of embedding the Signal Sciences Agent in th
         volumeMounts:
           - name: sigsci-socket
             mountPath: /var/run/
+    ```
+    - Loading the Signal Sciences Module in nginx.conf via ConfigMap:
+    ```
+    kind: ConfigMap
+    apiVersion: v1
+    data:
+      main-snippet: load_module /usr/lib/nginx/modules/ngx_http_sigsci_module.so;
+    metadata:
+      name: nginx-configuration
     ```
     - Adding a container for the Signal Sciences Agent:
     ```
